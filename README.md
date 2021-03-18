@@ -27,3 +27,5 @@ INFO[0003] Creds pushed to "hashicat-aws"
 INFO[0003] Done
 ...
 ```
+## To Do
+* Variablize the doormat account name within the alias command.
