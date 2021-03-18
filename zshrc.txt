@@ -1,0 +1,5 @@
+export TFH_token=<TOKEN VALUE> #API Token for app.terraform.io <ORG NAME> for tracking purposes
+export TFH_org=<ORG_NAME> #tf-helper target ORG or use -org org_name CLI option
+export tfeworkspacenames=$(curl --header "Authorization: Bearer $TFH_token" --header "Content-Type: application/vnd.api+json" https://app.terraform.io/api/v2/organizations/$TFH_org/workspaces -s | jq -c '.data[].attributes.name' | awk -F\" '{print $2}' )
+alias TFEpushAWSkeys='f(){echo $1; doormat aws --account <NAME> --tf-push --tf-organization $TFH_org --tf-workspace $1};doormat -r && eval $(doormat aws -a <NAME>); echo $tfeworkspacenames | while IFS= read -r ws; do f $ws; done'
+#Set the alias command to CRON or just run from terminal prior to a demo/use of TFC.
